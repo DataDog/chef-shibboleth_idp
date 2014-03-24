@@ -1,6 +1,6 @@
 ShibUserPassAuth {
 
-<% @mods.each do |name,mod| -%>
+<% @mods.each do |mod| -%>
   <%= mod[:module] %> sufficient
   <% mod.each do |key, value| -%>
     <%= key %>="<%= value %>"
