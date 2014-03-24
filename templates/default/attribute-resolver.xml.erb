@@ -37,10 +37,10 @@
          value['type'] = 'Simple'
        end
 
-       if ['Script', 'PrincipalName', 'TransientId'].include?(value['type'])
-         value['resolver'] = false
-         value['source_attribute'] = false
-       end
+ #      if ['Script', 'PrincipalName', 'TransientId'].include?(value['type'])
+ #        value['resolver'] = false
+ #        value['source_attribute'] = false
+ #      end
     -%>
       xsi:type="ad:<%= value['type'] %>"
     <% if value.has_key?('scope') -%>
