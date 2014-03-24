@@ -18,7 +18,7 @@ bash "run_installer" do
   code <<-EOH
     rm -rf "#{node['shibboleth_idp']['home']}"
     umask 0022 && echo -e "#{node['shibboleth_idp']["home"]}\n#{node['shibboleth_idp']["domain"]}\n#{node['shibboleth_idp']["keystore_password"]}\n" \
-     | JAVA_HOME=#{node['java']['java_home']} "#{node['shibboleth_idp']["installer_dir"]}/install.sh"
+     | JAVA_HOME=#{node['java']['java_home']} "#{node['shibboleth_idp']["installer_dir"]}/install.sh" -Didp.home=#{node['shibboleth_idp']['home']} -Didp.hostname=#{node['shibboleth_idp']['domain']} -Didp.keystore.pass=#{node['shibboleth_idp']['keystore_password']}
   EOH
   notifies :restart, "service[tomcat]"
 end
@@ -205,4 +205,4 @@ end
 link "/var/log/shibboleth" do
   to "#{node.shibboleth_idp.home}/logs"
 end
-  
+
