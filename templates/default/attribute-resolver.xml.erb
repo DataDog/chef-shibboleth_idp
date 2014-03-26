@@ -34,13 +34,17 @@
        end
 
        if not value.has_key?('type')
-         value['type'] = 'Simple'
+         raise "type needs to be set for attributes"
        end
 
- #      if ['Script', 'PrincipalName', 'TransientId'].include?(value['type'])
- #        value['resolver'] = false
- #        value['source_attribute'] = false
- #      end
+      if ['Script', 'PrincipalName', 'TransientId'].include?(value['type'])
+         if  value['resolver'] != false
+          raise "resolver needs to be false for " + value['type']
+         end
+         if  value['source_attribute'] != false
+          raise "source_attributes needs to be false for  " + value['type']
+         end
+       end
     -%>
       xsi:type="ad:<%= value['type'] %>"
     <% if value.has_key?('scope') -%>
